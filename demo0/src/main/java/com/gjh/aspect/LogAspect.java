@@ -27,6 +27,7 @@ public class LogAspect {
     ServletRequestAttributes attributes=(ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
     HttpServletRequest request=attributes.getRequest();
     logger.info("--------logBefore----------");
+
     logger.info("url={}",request.getRequestURI());
     logger.error("url={}","error"+request.getRequestURI());
     logger.debug("url={}","debug"+request.getRequestURI());

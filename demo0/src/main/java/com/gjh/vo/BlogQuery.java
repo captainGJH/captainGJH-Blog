@@ -7,6 +7,8 @@ public class BlogQuery {
     private String flag;
     private Long uid;
 
+    private String published;
+
     public BlogQuery() {
     }
 
@@ -17,7 +19,16 @@ public class BlogQuery {
                 ", typeid=" + typeid +
                 ", flag='" + flag + '\'' +
                 ", uid=" + uid +
+                ", published='" + published + '\'' +
                 '}';
+    }
+
+    public String getPublished() {
+        return published;
+    }
+
+    public void setPublished(String published) {
+        this.published = published;
     }
 
     public Long getUid() {
