@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		
+			<!--导航-->
+			<nav class="ui inverted attached segment daohan-mini">
+				<div class="ui container">
+					<div class="ui inverted secondary stackable menu">
+						<h2 class="ui teal heaader item "><i class="space shuttle icon"></i>CaptainGJH</h2>
+							<a href="/" class="gitem item g-mobile-hide"><i class="home icon"></i>首页</a>
+							<a href="#" class="gitem item g-mobile-hide"><i class="idea icon"></i>分类</a>
+							<a href="#" class="gitem item g-mobile-hide"><i class="tags icon"></i>标签</a>
+							<a href="#" class="gitem item g-mobile-hide"><i class="info icon"></i>关于我</a>
+							<div class="item">
+								<div class="gitem  ui icon  input g-mobile-hide">
+									<input type="text" placeholder="Seach....." />
+									<i class="search link icon"></i>
+								</div>
+							</div>
+							<div class="gitem right menu g-mobile-hide">
+								<a href="../editor" class="item"><i class="paint brush icon "></i>写博客</a>
+								<a href="#" class="dingdong item"><i class="bell icon "></i></a>
+								<div class="ui popup hidden">
+									<p><a href="#" target="_blank" class="g-blak g-text-thin">评论</a></p>
+									<p><a href="#" target="_blank" class="g-blak g-text-thin">关注</a></p>
+									<p><a href="#" target="_blank" class="g-blak g-text-thin">私信</a></p>
+									<p><a href="#" target="_blank" class="g-blak g-text-thin">回答</a></p>
+								</div>
+
+								<a href="../persiontext" class="liulang item" th:if="${not #strings.isEmpty(session.user)}">
+								<img class="ui avatar image" th:src="@{/upload/{img}(img=${session.user.getUheadimg()})}"></a>
+								<div class="ui popup hidden">
+
+									<p><a href="../persiontext" target="_blank" class="g-blak g-text-thin">个人中心</a></p>
+									<p><a href="#" target="_blank" class="g-blak g-text-thin">我的关注</a></p>
+									<p><a href="#" target="_blank" class="g-blak g-text-thin">账号设置</a></p>
+									<p><a href="#" target="_blank" class="g-blak g-text-thin">我的博客</a></p>
+									<p><a href="#" onclick="out();return false" target="_blank" class="g-blak g-text-thin">退出登录</a></p>
+
+								</div>
+
+								<a href="#" th:if="${#strings.isEmpty(session.user)}" class="item glogin">登录/注册</a>
+
+
+							</div>
+					</div>
+
+
+
+				</div>
+				</div>
+				</div>
+				<a href="#" class="ui menu toggle black icon botton g-right-top g-mobile-show">
+					<i class="sidebar icon"></i>
+				</a>
+
+			</nav>
+		
+		
+	</body>
+</html>
+<script>
+	function out() {
+		$.get("../douser/out",{},function (obj) {
+            $(window).attr('location','/');
+        })
+
+    }
+
+
+</script>
