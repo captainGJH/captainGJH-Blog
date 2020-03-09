@@ -4,6 +4,7 @@ package com.gjh.controller;
 import com.gjh.entity.User;
 import com.gjh.service.UserService;
 
+import com.gjh.util.RedisUtils;
 import org.springframework.data.redis.core.StringRedisTemplate;
 
 import org.springframework.stereotype.Controller;
@@ -30,7 +31,9 @@ public class UserAction {
     @Resource
     private UserService userService;
     @Resource
-    StringRedisTemplate stringRedisTemplate;
+    private StringRedisTemplate stringRedisTemplate;
+    @Resource
+    private RedisUtils redisUtils;
 
     @RequestMapping("gfile")//照片上传
     public String gfile(MultipartFile file,HttpSession session) throws Exception
@@ -54,6 +57,7 @@ public class UserAction {
     @ResponseBody
     public String login(String uemail,String upwd, HttpSession session)throws Exception
     {
+
 
         User u=userService.login(uemail,upwd);
         System.out.println(u);
@@ -83,7 +87,9 @@ public class UserAction {
     @Transactional
     public String register(User user,String num)throws Exception
     {
+        String redisemail=redisUtils.get(user.getUemail());
         User ue=userService.reEmail(user.getUemail());
+
         String num1=stringRedisTemplate.opsForValue().get("yan");
         if(user==null||user.equals(""))
         {
@@ -91,11 +97,15 @@ public class UserAction {
         }else if(!num.equals(num1))
         {
             return "2";
-      }else if(ue!=null)
+      }else if(redisemail!=null)
       {
-           return "3";       }
+           return "3";
+      }else if(ue!=null){
+            return "3";
+        }
 
         boolean u= userService.register(user);
+        redisUtils.set(user.getUemail(),user.getUemail());
         if (u==true)
         {
             return "1";
