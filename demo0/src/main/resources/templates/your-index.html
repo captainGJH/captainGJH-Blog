@@ -42,8 +42,13 @@
 								</div>
 
 								<div class="five wide column" th:if="${myuser.uid} ne ${lid}">
-									   <button class="ui red mini button">关注</button>
-											<button class="ui teal basic mini button">私信</button>		
+									   <button class="ui followme red mini button" type="button">
+										   <span class="sp" th:if="${session.isfollow} eq null">关注</span>
+										   <span class="sp" th:if="${session.isfollow} eq false">关注</span>
+										   <span class="sp" th:if="${session.isfollow} eq true">已关注</span>
+										   <label id="lid"></label>
+									   </button>
+											<button class="ui teal basic mini button" type="button">私信</button>
 								</div>
 
 							</div>							
@@ -66,8 +71,8 @@
 				<div class="ui attached segment">
 					<div th:each="list : ${yblogList}">
 					<p><h3 th:text="${list.btitle}"></h3></p>
-					<p class="g-gray">https://pandao.github.io/editor.md/ 网站下载压缩包解压1.首先可以在自己的静态页面新建一个文件夹来放编辑器插件所需的css可</p>
-					<p class="g-gray">https://pandao.github.io/editor.md/ 网站下载压缩包解压1.首先可以在自己的静态页面新建一个文件夹来放编辑器插件所需的css可</p>	
+					<p class="g-gray" th:text="${list.description}"></p>
+
 					 
 					<div class="ui two column grid">
 						<div class="column">
@@ -115,11 +120,7 @@
 							</div>
 							
 						</div>
-						
-						
-					
-						
-					
+
 						<!--二维码-->
 					<h4 class="ui horizontal divider header g-white">扫码关注我</h4>
 					<div class="ui card centered" style="width: 10em;">
@@ -139,4 +140,28 @@
 
 	</body>
 	<div th:replace="botton :: html"></div>
+	<script>//关注按钮部分
+    $('.followme').click(function () {
+        var id=[[${myuser.uid}]];
+        $.get("../Addfollow",{followId:id},function (obj) {
+            if(obj=="0"){
+                alert("请登录账号");
+                return;
+            }
+            if(obj=="1"){
+                $('.sp').empty();
+                $('#lid').html("已关注");
+            }
+            if(obj=="2"){
+                $('.sp').empty();
+                $('#lid').html("关注");
+            }
+        })
+
+    })
+
+
+	</script>
+
+
 </html>

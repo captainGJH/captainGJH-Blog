@@ -97,11 +97,15 @@
 						</div>
 
 					</div>
+					<div class="required field">
+						<textarea placeholder="博客描述......" th:text="*{description}" name="description" maxlength="200"></textarea>
+					</div>
+
 
 
 					<div class="inline fields">
 
-						<div class="field">
+						<div class="required field">
 							<div class="ui checkbox">
 								<input type="checkbox" id="bdofristImg" name="bdofristImg" class="hidden" th:checked="*{bdofristImg}"/>
 								<label for="bdofristImg" class="g-white">首图</label>
@@ -187,7 +191,7 @@
           }
         ]
     },
-        blogType :
+		blogType :
             {
                 identifier  : 'blogType.tid',
                 rules : [
@@ -196,9 +200,17 @@
                         prompt : '请输入博客分类'
                     }
                 ]
+            },
+        description:
+            {
+                identifier  : 'description',
+                rules : [
+                    {
+                        type   : 'empty',
+                        prompt : '请输入博客描述'
+                    }
+                ]
             }
-
-
 
     }
   })
