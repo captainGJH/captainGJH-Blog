@@ -3,6 +3,8 @@ package com.gjh.entity;
 
 
 
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;
@@ -12,7 +14,8 @@ import java.util.List;
 public class Blog {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue//(generator = "bid")
+  //  @GenericGenerator(name="bid",strategy = "uuid")
     private long bid;
     private String btitle;//标题
     @Basic(fetch = FetchType.LAZY)//懒加载
@@ -26,6 +29,8 @@ public class Blog {
     private boolean bshareStarement;//转载声明是否开启
     private boolean bcommentabled;//评论是否开启
     private String bpublished;//0删除1发布2未发布
+    private String description;//博客概述
+
     @Transient//不会入库
     private String tagIds;
 
@@ -82,6 +87,7 @@ public class Blog {
                 ", bshareStarement=" + bshareStarement +
                 ", bcommentabled=" + bcommentabled +
                 ", bpublished='" + bpublished + '\'' +
+                ", description='" + description + '\'' +
                 ", tagIds='" + tagIds + '\'' +
                 ", bcreateTime=" + bcreateTime +
                 ", bupdateTime=" + bupdateTime +
@@ -90,6 +96,14 @@ public class Blog {
                 ", user=" + user +
                 ", comments=" + comments +
                 '}';
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public long getBid() {

@@ -1,9 +1,6 @@
 package com.gjh.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,12 +12,12 @@ public class BlogType {
     private long tid;
     private String tname;
 
-    @OneToMany(mappedBy = "blogType")
+    @OneToMany(mappedBy = "blogType",fetch = FetchType.EAGER)
     private List<Blog> blogs=new ArrayList<>();
 
     @Override
     public String toString() {
-        return "BlogTypeDao{" +
+        return "BlogType{" +
                 "tid=" + tid +
                 ", tname='" + tname + '\'' +
                 ", blogs=" + blogs +
