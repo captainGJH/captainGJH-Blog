@@ -13,8 +13,12 @@ public interface UserService {
 
     Boolean register(User user);//注册
 
-    User login(String email,String pwd);//登录
+//    User login(String email,String pwd);//登录用了springsecurity权限管理
 
     User reEmail(String email);//查看email是否重复
+
+    public String code(String phone,String code);//手机短信功能
+
+    public void email(String u_email,String xinxi);//qq邮箱验证功能
 
 }

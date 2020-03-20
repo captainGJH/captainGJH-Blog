@@ -10,12 +10,15 @@ public class Comment {
     @Id
     @GeneratedValue
     private long cid;
+    private long uid;
+    private String nickname;
+    private String headimg;
     private String ccontent;
-
     @Temporal(TemporalType.TIMESTAMP)
     private Date cTime;//回复时间
     @ManyToOne
     private Blog blog;
+
     @ManyToOne
     private Comment parentComment;
 
@@ -32,12 +35,37 @@ public class Comment {
     public String toString() {
         return "Comment{" +
                 "cid=" + cid +
+                ", nickname='" + nickname + '\'' +
+                ", headimg='" + headimg + '\'' +
                 ", ccontent='" + ccontent + '\'' +
                 ", cTime=" + cTime +
                 ", blog=" + blog +
-                ", parentComment=" + parentComment +
-                ", replyComments=" + replyComments +
                 '}';
+    }
+
+
+    public long getUid() {
+        return uid;
+    }
+
+    public void setUid(long uid) {
+        this.uid = uid;
+    }
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
+    public String getHeadimg() {
+        return headimg;
+    }
+
+    public void setHeadimg(String headimg) {
+        this.headimg = headimg;
     }
 
     public long getCid() {

@@ -1,0 +1,73 @@
+﻿body
+{
+	margin:0px;
+	font-size:12px;
+}
+.btn1_del
+{
+	 background-image:url(../images/ico_del.gif);
+	 background-repeat:no-repeat;
+	 background-position:3px 2px;
+	 background-color:#DCEEF8;
+	 border:solid 1px #8DB0CE;
+	 padding:2px 0px 0px 0px;
+	 margin:0px;
+	 width:60px;
+	 height:23px;
+	 color:Black;
+	 word-spacing:10px;
+}
+.btn1_edit
+{
+	 background-image:url(../images/ico_edit.gif);
+	 background-repeat:no-repeat;
+	 background-position:3px 2px;
+	 background-color:#DCEEF8;
+	 border:solid 1px #8DB0CE;
+	 padding:2px 0px 0px 0px;
+	 margin:0px;
+	 width:60px;
+	 height:23px;
+	 color:Black;
+	 word-spacing:10px;
+}
+.btn1_del8
+{
+	 background-image:url(../images/ico_del.gif);
+	 background-repeat:no-repeat;
+	 background-position:3px 2px;
+	 background-color:#DCEEF8;
+	 border:solid 1px #8DB0CE;
+	 padding:2px 0px 0px 0px;
+	 margin:0px;
+	 width:200px;
+	 height:23px;
+	 color:Black;
+	 word-spacing:10px;
+}
+.btn1_del2
+{
+	 background-image:url(../images/ico_del.gif);
+	 background-repeat:no-repeat;
+	 background-position:3px 2px;
+	 background-color:#DCEEF8;
+	 border:solid 1px #8DB0CE;
+	 padding:2px 0px 0px 0px;
+	 margin:0px;
+	 height:23px;
+	 color:Black;
+	 word-spacing:10px;
+}
+.btn1_del3
+{
+	 background-image:url(../images/ico_edit.gif);
+	 background-repeat:no-repeat;
+	 background-position:3px 2px;
+	 background-color:#DCEEF8;
+	 border:solid 1px #8DB0CE;
+	 padding:2px 0px 0px 0px;
+	 margin:0px;
+	 height:23px;
+	 color:Black;
+	 word-spacing:10px;
+}

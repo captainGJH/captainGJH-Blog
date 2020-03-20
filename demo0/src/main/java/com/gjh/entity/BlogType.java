@@ -12,7 +12,7 @@ public class BlogType {
     private long tid;
     private String tname;
 
-    @OneToMany(mappedBy = "blogType",fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "blogType",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     private List<Blog> blogs=new ArrayList<>();
 
     @Override

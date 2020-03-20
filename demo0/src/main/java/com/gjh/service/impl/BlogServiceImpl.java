@@ -45,20 +45,22 @@ public class BlogServiceImpl implements BlogService{
     @Override
     public Blog getMDBlog(Long id) {
      Blog b=blogDao.findByBid(id);
+        b.setBviews(b.getBviews()+1);
    if(b==null){
      throw new NotFoundException("博客不存在");
         }
         Blog blog=new Blog();
         BeanUtils.copyProperties(b,blog);//将b的内容copy给blog
         String content=blog.getBcontent();
+        blogDao.save(blog);//将view的值修改
         blog.setBcontent(MarkdownUtils.markdownToHtmlExtensions(content));
         return blog;
     }
 
     @Override
     public List<Blog> listNewsBlog(Integer size) {
-        Sort.Order order=new Sort.Order(Sort.Direction.DESC, "bupdateTime");
-        PageRequest request = PageRequest.of(0,size,Sort.by(order));
+        Sort order=Sort.by(Sort.Direction.DESC, "bupdateTime");
+        PageRequest request = PageRequest.of(0,size,order);
 
         return blogDao.findNew(request);
     }
@@ -146,5 +148,11 @@ public class BlogServiceImpl implements BlogService{
     @Override
     public void removeBlog(Long id) {
         blogDao.deleteById(id);
+    }
+
+
+    @Override
+    public Page<Blog> listBlog(String query, Pageable pageable) {
+        return blogDao.getQuery(query,pageable);
     }
 }

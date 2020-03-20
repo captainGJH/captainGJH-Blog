@@ -42,8 +42,8 @@ public class UserAction {
         String extName=file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf("."));
         String fileName= UUID.randomUUID().toString()+extName;
 
-//        String filepath="/root/img";//linux地址
-        String filepath="F:\\upload\\";
+        String filepath="/root/img/";//linux地址
+//        String filepath="F:\\upload\\";
         File dest=new File(filepath + fileName);
         file.transferTo(dest);
         User u=(User)session.getAttribute("user");
@@ -53,59 +53,43 @@ public class UserAction {
         return "redirect:/persiontext";
 
     }
-    @GetMapping("login")
-    @ResponseBody
-    public String login(String uemail,String upwd, HttpSession session)throws Exception
-    {
-
-
-        User u=userService.login(uemail,upwd);
-        System.out.println(u);
-        if(u!=null)
-        {
-            session.setAttribute("user",u);
-            return "1";
-        }else
-            {
-                return "0";
-
-            }
-    }
 
     @GetMapping("yan")
     @ResponseBody
-    public String yan()throws Exception
+    public String yan(String email)throws Exception
     {
+        //可以手机验证调用 userService.code()方法
+
         int random=(int)(Math.random()*9999)+10000;
         String random1=String.valueOf(random);
-        stringRedisTemplate.opsForValue().set("yan",random1,60, TimeUnit.SECONDS);
+        //将email 和验证码存个60秒
+        redisUtils.setForTimeMIN(email,random1,1);
+        userService.email(email,random1);
         return random1;
     }
-
-    @GetMapping("register")
+    @GetMapping("/register")
     @ResponseBody
     @Transactional
     public String register(User user,String num)throws Exception
     {
-        String redisemail=redisUtils.get(user.getUemail());
-        User ue=userService.reEmail(user.getUemail());
+        System.out.println("我进来了啊");
+        boolean isMember=redisUtils.isMember("email",user.getUemail());//判断是否重复
+        String yan=redisUtils.get(user.getUemail());//获取验证码
 
-        String num1=stringRedisTemplate.opsForValue().get("yan");
+
         if(user==null||user.equals(""))
         {
             return "0";
-        }else if(!num.equals(num1))
+        }
+        if(yan==null)
         {
             return "2";
-      }else if(redisemail!=null)
-      {
-           return "3";
-      }else if(ue!=null){
-            return "3";
         }
-
+      if(isMember==true) {
+        return "3";
+       }
         boolean u= userService.register(user);
-        redisUtils.set(user.getUemail(),user.getUemail());
+        redisUtils.add("email",user.getUemail());
         if (u==true)
         {
             return "1";
@@ -116,19 +100,12 @@ public class UserAction {
 
     }
 
-
-
-
-
-
-
-
-
     @GetMapping("out")
     @ResponseBody
  public String out(HttpSession session)throws Exception
     {
         session.removeAttribute("user");
+        session.removeAttribute("isfollow");
 
         return "0";
     }

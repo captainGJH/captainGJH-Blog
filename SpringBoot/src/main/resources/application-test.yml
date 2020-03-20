@@ -1,0 +1,6 @@
+server:
+  port: 5050
+  servlet:
+      context-path: /springboot
+myuser.name: 测试环境郭4
+myuser.age: 108

@@ -2,6 +2,7 @@ package com.gjh.controller;
 
 import com.gjh.dao.BlogDao;
 import com.gjh.entity.Blog;
+import com.gjh.entity.Comment;
 import com.gjh.entity.User;
 import com.gjh.service.*;
 import com.gjh.vo.BlogQuery;
@@ -37,9 +38,8 @@ public class BlogAction {
     @Resource
     private AttentionRedisService attentionRedisService;
 
-    @PostMapping("bsave")//保存博客
-    public String save(Blog blog ,Model model)throws Exception
-    {
+    @PostMapping("/bsave")//保存博客
+    public String save(Blog blog ,Model model)throws Exception {
         if(blog.getBflag()==""||blog.getBflag()==null){
             blog.setBflag("原创");
         }
@@ -52,31 +52,27 @@ public class BlogAction {
 
     }
     @RequestMapping("/editor")//写博客
-    public String editor(Model model)
-    {
+    public String editor(Model model)throws Exception {
         setTypeAndTag(model);
         model.addAttribute("blog",new Blog());
 
         return "blog-text";
     }
     @RequestMapping("/redit/{uid}")//博客编辑
-    public String redit(Model model,@PathVariable long uid)
-    {
+    public String redit(Model model,@PathVariable long uid)throws Exception {
         setTypeAndTag(model);
         Blog blog=blogService.getBlog(uid);
         blog.init();
         model.addAttribute("blog",blog);
         return "blog-text";
     }
-    private void setTypeAndTag(Model model)//初始化类型和标签
-    {
+    private void setTypeAndTag(Model model)throws Exception{//初始化类型和标签
         model.addAttribute("typeall",blogTypeService.listType());
         model.addAttribute("tagall",blogTagService.listTag());
     }
     @RequestMapping("/blogs/delect")//博客删除
     @ResponseBody
-    public String delectBlog(long bid, RedirectAttributes attributes)
-    {
+    public String delectBlog(long bid, RedirectAttributes attributes)throws Exception {
 
         Blog blog=blogService.getBlog(bid);
         blog.setBpublished("0");
@@ -86,15 +82,23 @@ public class BlogAction {
         return "1";
     }
 
-    @GetMapping("blogdetails/{bid}")//博客详情
+    @GetMapping("/blogdetails/{bid}")//博客详情
     @Transactional
-    public String blogdetails(@PathVariable("bid")Long bid,Model model){
-   Blog blog=blogService.getMDBlog(bid);
-   model.addAttribute("blog",blog);
+    public String blogdetails(@PathVariable("bid")Long bid,Model model,HttpSession session)throws Exception{
+        Blog blog=blogService.getMDBlog(bid);//调用方法会自动添加观看次数（bviews+1）
+        if (session.getAttribute("user")!=null){
+            User u=(User)session.getAttribute("user");
+            Long lid=u.getUid();
+            model.addAttribute("lid",lid);//用来前端页面判断是否显示关注按钮使用
+            boolean isfollow=attentionRedisService.isFollowed(u.getUid(),blog.getUser().getUid());
+            // model.addAttribute("isfollow",isfollow);
+            session.setAttribute("isfollow",isfollow);
+        }
+
+             model.addAttribute("blog",blog);
+
         return "blog";
     }
-
-
 
     @RequestMapping("/blogget")//个人博客列表
     @Transactional
@@ -109,7 +113,7 @@ public class BlogAction {
         model.addAttribute("listtype",blogTypeService.listType());
         return "myblogs";
     }
-    @RequestMapping("persiontext")//个人中心
+    @RequestMapping("/persiontext")//个人中心
     public String persiontext(HttpSession session,Model model)throws Exception{
         User u=(User)session.getAttribute("user");
 //        int myFans=attentionService.getFans(u.getUid(),"1"); mysql中的关注粉丝表(备用)
@@ -141,7 +145,8 @@ public class BlogAction {
 
         return "your-index-follow";
     }
-    public void zhuye(HttpSession session,Model model,Long uid){//主页和他的关注页 的共享
+    //主页和他的关注页 的共享
+    private void zhuye(HttpSession session,Model model,Long uid)throws Exception{
 
         if (session.getAttribute("user")!=null){
             User u=(User)session.getAttribute("user");
@@ -161,10 +166,10 @@ public class BlogAction {
         model.addAttribute("myFollow",myFollow);
 
     }
-    @RequestMapping("Addfollow")//添加/取消关注
+    @RequestMapping("/Addfollow")//添加/取消关注
     @ResponseBody
     @Transactional
-    public String Addfollow(Long followId,HttpSession session){
+    public String Addfollow(Long followId,HttpSession session)throws Exception{
         User user=(User)session.getAttribute("user");
         if(user==null)
         {

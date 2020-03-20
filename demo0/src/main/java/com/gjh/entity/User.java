@@ -1,12 +1,15 @@
 package com.gjh.entity;
 
+
+
 import javax.persistence.*;
 import java.util.ArrayList;
+
 import java.util.Date;
 import java.util.List;
 
 @Entity
-public class User {
+public class User{
     @Id
     @GeneratedValue
     private long uid;
@@ -29,8 +32,11 @@ public class User {
 
 
 
+
     @OneToMany(mappedBy = "user")
   private List<Blog> blogs = new ArrayList<>();
+
+
 
     public User() {
     }
@@ -201,4 +207,5 @@ public class User {
     public void setBlogs(List<Blog> blogs) {
         this.blogs = blogs;
     }
+
 }

@@ -13,6 +13,7 @@ import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 @Service
 public class AttentionRedisServiceImpl implements AttentionRedisService {
@@ -20,8 +21,8 @@ public class AttentionRedisServiceImpl implements AttentionRedisService {
     private RedisFollowHelper redisFollowHelper;
 
     @Transactional
-    @Override
-    public AttentionRedis addByUser(User user) {
+    @Override//将mysql中user表有用的对象保存在对应的AttentionRedis对象中
+    public AttentionRedis addByUser(User user){
         AttentionRedis attentionRedis=new AttentionRedis();
         attentionRedis.setId(user.getUid());
         attentionRedis.setNikeName(user.getUnickname());

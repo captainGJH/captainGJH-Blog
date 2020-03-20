@@ -54,7 +54,7 @@ public class Blog {
         this.tagIds = tagsAll(this.getTags());
     }
 
-    private String tagsAll(List<BlogTag> tags){
+    private String tagsAll(List<BlogTag> tags){//将数据库中的数据转化成1，2,3的形式
         if(!tags.isEmpty()){
             StringBuffer ids=new StringBuffer();
             Boolean flag=false;
@@ -91,10 +91,7 @@ public class Blog {
                 ", tagIds='" + tagIds + '\'' +
                 ", bcreateTime=" + bcreateTime +
                 ", bupdateTime=" + bupdateTime +
-                ", blogType=" + blogType +
-                ", tags=" + tags +
                 ", user=" + user +
-                ", comments=" + comments +
                 '}';
     }
 

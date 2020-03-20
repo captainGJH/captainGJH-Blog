@@ -1,0 +1,36 @@
+#spring:
+# profiles:
+#   active: test
+server:
+  port: 7070
+  servlet:
+      context-path: /SpringBoot3
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/test?serverTimezone=UTC
+    username: root
+    password: root
+    type: com.alibaba.druid.pool.DruidDataSource
+    max-active: 50
+    initial-size: 10
+    max-wait: 60000
+    min-idle: 10
+    time-between-eviction-runs-millis: 60000
+    min-evictable-idle-time-millis: 300000
+    validation-query: select 1 from dual
+    test-on-borrow: false
+    test-on-return: false
+    test-while-idle: true
+    pool-prepared-statements: false
+    filters: stat,wall,slf4j
+  mvc:
+    view:
+      prefix: /WEB-INF/jsp/
+      suffix: .jsp
+
+
+
+mybatis:
+  mapper-locations: classpath:com/gjh/dao/*.xml
+  type-aliases-package: com.gjh.entity

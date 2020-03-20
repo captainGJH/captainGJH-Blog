@@ -1,0 +1,8 @@
+server:
+  port: 6060
+
+  servlet:
+    context-path: /springboot
+
+myuser.name: 生产环境郭4
+myuser.age: 108

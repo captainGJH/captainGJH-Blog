@@ -1,0 +1,4 @@
+﻿#winpop { width:200px; height:0px; position:absolute; right:0; bottom:0; border:1px solid #999999; margin:0; padding:1px; overflow:hidden; display:none; background:#FFFFFF}
+#winpop .title { width:100%; height:20px; line-height:20px; background:#FFCC00; font-weight:bold; text-align:center; font-size:12px;}
+#winpop .con { width:100%; height:80px; line-height:80px; font-weight:bold; font-size:12px; color:blue; text-decoration:none; text-align:center}
+.close { position:absolute; right:4px; top:-1px; color:#FFFFFF; cursor:pointer}
