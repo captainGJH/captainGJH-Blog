@@ -38,17 +38,24 @@ public class UserAction {
     @RequestMapping("gfile")//照片上传
     public String gfile(MultipartFile file,HttpSession session) throws Exception
     {
-
+        User u=(User)session.getAttribute("user");
         String extName=file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf("."));
         String fileName= UUID.randomUUID().toString()+extName;
 
-        String filepath="/root/img/";//linux地址
-//        String filepath="F:\\upload\\";
-        File dest=new File(filepath + fileName);
-        file.transferTo(dest);
-        User u=(User)session.getAttribute("user");
-        u.setUheadimg(fileName);
-        userService.add(u);
+//        String filepath="/root/img/";//linux地址
+        String filepath="F:\\upload\\";
+        File fdelete=new File(filepath + u.getUheadimg());
+        if(fdelete.exists() == true) {
+            System.out.println("图片存在，可执行删除操作");
+            fdelete.delete();
+        }
+
+            File dest=new File(filepath + fileName);
+            file.transferTo(dest);
+            u.setUheadimg(fileName);
+            userService.add(u);
+
+
 
         return "redirect:/persiontext";
 

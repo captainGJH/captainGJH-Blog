@@ -3,19 +3,22 @@ package com.gjh.entity;
 
 
 
-import org.hibernate.annotations.GenericGenerator;
+
+
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 @Entity
-public class Blog {
+public class Blog implements Serializable {
 
-    @Id
+
     @GeneratedValue//(generator = "bid")
   //  @GenericGenerator(name="bid",strategy = "uuid")
+    @Id
     private long bid;
     private String btitle;//标题
     @Basic(fetch = FetchType.LAZY)//懒加载

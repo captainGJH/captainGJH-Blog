@@ -3,6 +3,8 @@ package com.gjh.service.impl;
 
 import com.gjh.NotFoundException;
 import com.gjh.dao.BlogDao;
+import com.gjh.elasticsearch.ESBlog;
+import com.gjh.elasticsearch.ESBlogDao;
 import com.gjh.entity.Blog;
 import com.gjh.entity.BlogType;
 import com.gjh.service.BlogService;
@@ -34,7 +36,8 @@ public class BlogServiceImpl implements BlogService{
 
     @Resource
     private BlogDao blogDao;
-
+    @Resource
+    private ESBlogDao esBlogDao;
 
     @Override
     public Blog getBlog(Long id) {
@@ -45,7 +48,9 @@ public class BlogServiceImpl implements BlogService{
     @Override
     public Blog getMDBlog(Long id) {
      Blog b=blogDao.findByBid(id);
+     ESBlog esBlog=esBlogDao.findByBid(id);
         b.setBviews(b.getBviews()+1);
+        esBlog.setBviews(b.getBviews()+1);
    if(b==null){
      throw new NotFoundException("博客不存在");
         }
@@ -53,6 +58,7 @@ public class BlogServiceImpl implements BlogService{
         BeanUtils.copyProperties(b,blog);//将b的内容copy给blog
         String content=blog.getBcontent();
         blogDao.save(blog);//将view的值修改
+        esBlogDao.save(esBlog);//将es中的view的值修改
         blog.setBcontent(MarkdownUtils.markdownToHtmlExtensions(content));
         return blog;
     }
@@ -65,19 +71,24 @@ public class BlogServiceImpl implements BlogService{
         return blogDao.findNew(request);
     }
 
-    @Override
-    public Page<Blog> listBlog(Pageable pageable) {
-        return blogDao.findAll(new Specification<Blog>() {
-            @Nullable
-            @Override
-            public Predicate toPredicate(Root<Blog> root, CriteriaQuery<?> cq, CriteriaBuilder cb) {
-                List<Predicate> predicateList=new ArrayList<>();
-                predicateList.add(cb.equal(root.get("bpublished"),"1"));
-                cq.where(predicateList.toArray(new Predicate[predicateList.size()]));
-                return null;
-            }
-        },pageable);
-    }
+//    @Override
+//    public Page<Blog> listBlog(Pageable pageable) {
+//        return blogDao.findAll(new Specification<Blog>() {
+//            @Nullable
+//            @Override
+//            public Predicate toPredicate(Root<Blog> root, CriteriaQuery<?> cq, CriteriaBuilder cb) {
+//                List<Predicate> predicateList=new ArrayList<>();
+//                predicateList.add(cb.equal(root.get("bpublished"),"1"));
+//                cq.where(predicateList.toArray(new Predicate[predicateList.size()]));
+//                return null;
+//            }
+//        },pageable);
+//    }
+@Override
+public Page<Blog> listBlog(Pageable pageable) {
+  return blogDao.findAll(pageable);
+}
+
     @Override
     public Page<Blog> listBlog(Pageable pageable, BlogQuery blogQuery) {
 
@@ -151,8 +162,8 @@ public class BlogServiceImpl implements BlogService{
     }
 
 
-    @Override
-    public Page<Blog> listBlog(String query, Pageable pageable) {
-        return blogDao.getQuery(query,pageable);
-    }
+//    @Override
+//    public Page<Blog> listBlog(String query, Pageable pageable) {
+//        return blogDao.getQuery(query,pageable);
+//    }
 }

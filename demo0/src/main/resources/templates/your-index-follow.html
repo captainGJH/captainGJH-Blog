@@ -27,7 +27,7 @@
 						<div class="ui  stackable  grid">
 						<div class="four wide column center aligned">
 							<div class="ui img g-box">
-								<img class="ui g-box-img image" th:src="@{/upload/{img}(img=${myuser.uheadimg})}">
+								<img class="ui g-box-img image"  th:src="@{/root/img/{img}(img=${myuser.uheadimg})}" >
 							</div>
 
 							<div class="ui content"><a href="#"class="header">隐私设置</a></div>
@@ -127,7 +127,7 @@
 								
 							</div>
 							<div class="ui attached center aligned segment">
-									<a th:text="${myFans}"></a>
+								<a th:href="@{/fans/{uid}(uid=${myuser.uid})}" th:text="${myFans}"></a>
 								<p>他的粉丝</p>
 							
 							</div>

@@ -54,6 +54,21 @@
 
 	</footer>
 
+		<div class="ui notlongin mini modal">
+			<div class="content">
+				<p>请登录你的账号</p>
+				<div class="ui two column grid">
+					<div class="column">
+					</div>
+					<div class="right aligned column">
+						<button class="ui mini queding button" type="button">确定</button>
+					</div>
+
+				</div>
+
+
+
+			</div>
 
 
 	<script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
@@ -74,6 +89,9 @@
         <!--点击取消,隐藏窗口-->
         $('.dqx').click(function () {
             $('.ui.delect.modal').modal('hide');
+        });
+        $('.queding').click(function () {
+            $('.ui.notlongin.modal').modal('hide');
         });
 
 

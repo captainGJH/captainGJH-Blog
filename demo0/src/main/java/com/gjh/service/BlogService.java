@@ -16,9 +16,9 @@ public interface BlogService {
 
     Page<Blog> listBlog(Pageable pageable,BlogQuery blogQuery);//条件分页显示
 
-    Page<Blog> listBlog(Pageable pageable);//首页分页显示
+    Page<Blog> listBlog(Pageable pageable);//首页分页显示 因为改成了es搜索 所以 改成测试
 
-    Page<Blog> listBlog(String query,Pageable pageable);//全局搜索
+    //Page<Blog> listBlog(String query,Pageable pageable);//全局搜索
 
     List<Blog> listNewsBlog(Integer size);//最新推荐;
 

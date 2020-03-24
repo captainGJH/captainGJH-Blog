@@ -7,8 +7,14 @@ import com.gjh.service.AttentionRedisService;
 import com.gjh.service.UserService;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
+import sun.misc.BASE64Decoder;
+import sun.misc.BASE64Encoder;
 
 import javax.annotation.Resource;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Map;
 //参考https://blog.csdn.net/qq_44717317/article/details/102846580?depth_1-utm_source=distribute.pc_relevant.none-task&utm_source=distribute.pc_relevant.none-task
 @Component
@@ -92,6 +98,39 @@ public class RedisFollowHelper {
         Long followCount= redisHelper.hashSize(followCountKey);
         return  followCount;
     }
+
+
+//    /**
+//     * 将图片内容编码为字符串
+//     * @param file
+//     * @return
+//     */
+//    public static String encodeImageToBase64(MultipartFile file) {
+//        byte[] bytes = null;
+//        try {
+//            bytes = file.getBytes();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        BASE64Encoder encoder = new BASE64Encoder();
+//        return encoder.encode(bytes).trim();
+//    }
+//
+//    /**
+//     * 将图片内容解码为输入流
+//     * @param base
+//     * @return
+//     */
+//    public static InputStream decodeBase64ToImage(String base) {
+//        BASE64Decoder decoder = new BASE64Decoder();
+//        byte[] decodeBytes = null;
+//        try {
+//            decodeBytes = decoder.decodeBuffer(base);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        return new ByteArrayInputStream(decodeBytes);
+//    }
 
 
 }

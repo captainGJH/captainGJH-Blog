@@ -30,8 +30,8 @@
 							<div class="thirteen wide column">
 						<div class="ui  horizontal link list">
 												<div class="item">
-													<img th:src="@{/upload/{img}(img=${blog.user.uheadimg})}" alt="" class="ui avatar image" />
-													<div class="content"><a href="#"class="header" th:text="${blog.user.unickname}"></a></div>
+													<img th:src="@{/root/img/{img}(img=${blog.user.uheadimg})}" alt="" class="ui avatar image" />
+													<div class="content"><a th:href="@{../youindex/{uid}(uid=${blog.user.uid})}" class="header" th:text="${blog.user.unickname}"></a></div>
 								                 </div>
 								                    <div class="item"><i class="calendar icon"></i><span th:text="${#dates.format(blog.bupdateTime,'yyyy-MM-dd')}"></span></div>
 													<div class="item"><i class="eye icon"></i><span th:text="${blog.bviews}"></span></div>

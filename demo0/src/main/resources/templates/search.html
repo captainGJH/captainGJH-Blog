@@ -45,8 +45,8 @@
 												<div class="eleven wide column">
 													<div class="ui mini horizontal link list">
 														<div class="item">
-															<img th:src="@{/root/img/{img}(img=${list.user.uheadimg})}" alt="" class="ui avatar image" />
-															<div class="content"><a th:href="@{../youindex/{uid}(uid=${list.user.uid})}" class="header" th:text="${list.user.unickname}"></a></div>
+															<img th:src="@{/root/img/{img}(img=${list.uheadimg})}" alt="" class="ui avatar image" />
+															<div class="content"><a th:href="@{../youindex/{uid}(uid=${list.uid})}" class="header" th:text="${list.unickname}"></a></div>
 														</div>
 														<div class="item"><i class="calendar icon"></i><span th:text="${#dates.format(list.bupdateTime,'yyyy-MM-dd')}">9999-9-9</span></div>
 														<div class="item"><i class="eye icon"></i>[[${list.bviews}]]</div>
@@ -55,13 +55,13 @@
 												</div>
 
 												<div class="right aligned five wide column">
-													<a href="#" target="_blank" class="ui basic teal label g-padded-mini" th:text="${list.blogType.tname}"></a>
+													<a href="#" target="_blank" class="ui basic teal label g-padded-mini" th:text="${list.tname}"></a>
 												</div>
 											</div>
 										</div>
 										<div class="three column">
 											<a href="#" target="_blank">
-												<img src="img/3.jpg" alt=""  style="width: 200px; height: 150px;" />
+												<img src="../img/3.jpg" alt=""  style="width: 200px; height: 150px;" />
 											</a>
 
 

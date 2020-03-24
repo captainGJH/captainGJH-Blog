@@ -1,16 +1,12 @@
-
 server:
   port: 1010
-  servlet:
-      context-path:
-
 
 spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1/test?serverTimezone=UTC
+    url: jdbc:mysql://47.111.254.72/test?serverTimezone=UTC
     username: root
-    password: root
+    password: 123456
     type: com.alibaba.druid.pool.DruidDataSource
     max-active: 50
     initial-size: 10
@@ -24,8 +20,6 @@ spring:
     test-while-idle: true
     pool-prepared-statements: false
     filters: stat,wall,slf4j
-
-
 
 
   redis:
@@ -50,6 +44,13 @@ spring:
     password: ikrmrploqsnpiddc
     protocol: smtp
     default-encoding: utf-8
+  data:
+    elasticsearch:
+      cluster-name: docker-cluster
+      cluster-nodes: 47.111.254.72:9300
+  elasticsearch:
+    jest:
+      uris: http://47.111.254.72:9200
 
 
 

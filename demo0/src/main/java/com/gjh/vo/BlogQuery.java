@@ -1,11 +1,18 @@
 package com.gjh.vo;
 
+
+import org.springframework.data.annotation.Id;
+import org.springframework.data.elasticsearch.annotations.Document;
+
+
 public class BlogQuery {
 
+    private Long uid;
     private String title;
+
     private Long typeid;
     private String flag;
-    private Long uid;
+
 
     private String published;
 
@@ -22,6 +29,8 @@ public class BlogQuery {
                 ", published='" + published + '\'' +
                 '}';
     }
+
+
 
     public String getPublished() {
         return published;

@@ -11,6 +11,7 @@ public class Demo0Application{
 
 	public static void main(String[] args)
 		{
+			System.setProperty("es.set.netty.runtime.available.processors", "false");
 		SpringApplication.run(Demo0Application.class, args);
 	}
 

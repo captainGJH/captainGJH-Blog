@@ -64,6 +64,7 @@ protected PasswordEncoder passwordEncoder(){
                 .antMatchers("/redit/{uid}").hasAnyAuthority("PRODUCT_USER")
                 .antMatchers("/blogs/delect").hasAnyAuthority("PRODUCT_USER")
                 .antMatchers("/Addfollow").hasAnyAuthority("PRODUCT_USER")
+                .antMatchers("/blogget").hasAnyAuthority("PRODUCT_USER")
 //                .antMatchers("/**")禁用全部
 //                .fullyAuthenticated()
                 .and()

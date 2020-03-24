@@ -16,7 +16,9 @@ public interface BlogDao extends JpaRepository<Blog,Long>,JpaSpecificationExecut
     Blog findByBid(Long id);
 
     //全局搜索  ？1的意思是第一个参数
-    @Query("select b from Blog b where b.btitle like ?1 or b.bcontent like ?1 or b.description like ?1")
-    Page<Blog> getQuery(String query,Pageable pageable);
+//    @Query("select b from Blog b where b.btitle like ?1 or b.bcontent like ?1 or b.description like ?1")
+//    Page<Blog> getQuery(String query,Pageable pageable);
+
+
 
 }

@@ -131,12 +131,17 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-mail</artifactId>
 		</dependency>
-		<!--全局搜索引擎ES-->
+		<!--全局搜索引擎ES springboot默认使用 springdata es 模块-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-elasticsearch</artifactId>
 		</dependency>
-
+		<!--全局搜索引擎ES springboot第二种使用es的方式-->
+		<dependency>
+			<groupId>io.searchbox</groupId>
+			<artifactId>jest</artifactId>
+			<version>6.3.1</version>
+		</dependency>
 
 	</dependencies>
 

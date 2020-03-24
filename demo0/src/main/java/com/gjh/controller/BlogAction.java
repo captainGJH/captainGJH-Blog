@@ -145,6 +145,18 @@ public class BlogAction {
 
         return "your-index-follow";
     }
+    @RequestMapping("fans/{uid}")//他的fans
+    @Transactional
+    public String fans(Model model ,@PathVariable long uid,HttpSession session)throws Exception
+    {
+        zhuye(session,model,uid);
+
+        model.addAttribute("myfans", attentionRedisService.getFans(uid));
+
+        return "your-index-fans";
+    }
+
+
     //主页和他的关注页 的共享
     private void zhuye(HttpSession session,Model model,Long uid)throws Exception{
 
