@@ -1,0 +1,14 @@
+# Created by .ignore support plugin (hsz.mobi)
+.idea
+*.iml
+target
+.classpath
+.project
+.settings
+.mvn
+mvnw
+mvnw.cmd
+*/src/main/test/
+*/src/test/java
+find
+data
