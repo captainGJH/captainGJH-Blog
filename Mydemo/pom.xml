@@ -25,7 +25,7 @@
     <!--mybatis-spring要去maven看对应的mybatis版本不能乱来-->
     <mybatisspring.version>2.0.2</mybatisspring.version>
     <!--json数据 -->
-    <jackson.version>2.9.8</jackson.version>
+    <jackson.version>2.12.1</jackson.version>
     <!--mysql 5.1.30-->
     <mysql.version>5.1.48</mysql.version>
     <!-- log4j日志文件管理包版本 -->
